@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     private float powerupStrength = 15.0f;
     public GameObject powerupIndicator;
+    public GameObject gameOverText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (transform.position.y < -4){
+            transform.position = new Vector3(0, 0, 0);
+            gameOverText.SetActive(true);
+        }
+
         float forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
